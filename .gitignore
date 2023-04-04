@@ -1,5 +1,5 @@
 .idea/
-doc/.vscode/
+/doc/.vscode/
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
