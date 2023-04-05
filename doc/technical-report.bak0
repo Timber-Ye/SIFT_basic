@@ -60,17 +60,17 @@ subfigure
 %================Document===================
 
 \begin{document}
-\maketitle
-\newpage
+    \maketitle
+    \newpage
 
-% --------------------->>正文<<-----------------------
-\pagestyle{fancynotes}
-\input{src/Introduction.tex}
-\input{src/Keypoint detection.tex}
-\input{src/SIFT descriptor.tex}
-\input{src/Matching descriptors.tex}
-\input{src/Experiment.tex}
+    % --------------------->>正文<<-----------------------
+    \pagestyle{fancynotes}
+    \input{src/Introduction.tex}
+    \input{src/Keypoint detection.tex}
+    \input{src/SIFT descriptor.tex}
+    \input{src/Matching descriptors.tex}
+    \input{src/Experiment.tex}
 
-% --------------------->>参考文献<<-----------------------
-\bibliography{egbib}
+    % --------------------->>参考文献<<-----------------------
+    \bibliography{egbib}
 \end{document}

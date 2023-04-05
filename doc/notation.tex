@@ -1,3 +1,9 @@
+\newcommand\figref[1]{\textbf{图}~\ref{#1}}
+\newcommand\thmref[1]{\textbf{定理}~\ref{#1}}
+\newcommand\equref[1]{\textbf{式}~(\ref{#1})~}
+
+\renewcommand{\figurename}{图}
+
 \newmintinline{python}{breakbytoken=true}
 \newmintedfile{python}{breakanywhere,breaklines, linenos, mathescape, frame=none}
 \newmintedfile{text}{breakanywhere,breaklines, linenos, mathescape, frame=none}
@@ -22,3 +28,26 @@
 \definecolor{misc}{RGB}{225, 104, 219}
 \definecolor{unlabeled}{RGB}{102, 102, 102}
 \definecolor{bg}{rgb}{0.95,0.95,0.95}
+
+% \newacronym{⟨label⟩}{⟨abbrv⟩}{⟨full⟩}
+\newacronym[longplural={尺度不变特征变换（Scale-Invariant Feature Transform, SIFT）}]%
+           {sift}{SIFT}{尺度不变特征变换（Scale-Invariant Feature Transform, SIFT）}
+\newcommand{\sift}{\gls*{sift}}
+
+\newacronym{scale}{尺度不变性}{尺度不变性（scale invariance）}
+\newcommand{\sinvariance}{\emph{\gls*{scale}}}
+
+\newacronym{rotation}{旋转不变性}{旋转不变性（rotation invariance）}
+\newcommand{\rinvariance}{\emph{\gls*{rotation}}}
+
+\newacronym{gspd}{高斯偏导}{高斯偏导（Derivative of Gaussian）}
+\newcommand{\gspd}{\gls*{gspd}}
+
+\newacronym{lpl}{LoG}{拉普拉斯核（Laplacian of Gaussian, LoG）}
+\newcommand{\lpl}{\gls*{lpl}}
+
+\newacronym{DoG}{DoG}{高斯差分（Difference of Gaussian, DoG）}
+\newcommand{\DoG}{\gls*{DoG}}
+
+\newacronym{octave}{octave}{octave}
+\newcommand{\octave}{\emph{\gls*{octave}}}
