@@ -1,0 +1,76 @@
+\documentclass[12pt]{article}
+%========================================
+\usepackage{%
+custom-NotesTeX,
+lipsum,
+fontspec,
+fontawesome,
+siunitx,
+tikz,
+cncolours,
+annotate-equations,
+subfigure
+}
+\renewcommand{\baselinestretch}{1.35}
+\usepackage[hyperfirst=false, nohypertypes={acronym}]{glossaries}
+\setacronymstyle{short-long}
+\renewcommand*{\genacrfullformat}[2]{%
+   \glsentrylong{#1}%
+}
+
+\usepackage[nottoc]{tocbibind}
+\usepackage[cachedir=./Tmp/mintedcache]{minted}
+\usemintedstyle{default}
+
+%------------------>>Font<<------------------
+\usepackage{xeCJK}
+\setmainfont{Palatino}
+\setsansfont{Arial}
+\setmonofont{Hack Nerd Font Mono}
+
+\setCJKsansfont{Arial}
+\setCJKmonofont{SF Mono SC}
+\setCJKmainfont[BoldFont={STHeiti},ItalicFont={STKaiti},SlantedFont = {HanziPen SC} , SlantedFeatures = {FakeSlant}]{STSong}
+% \setCJKmainfont[BoldFont={STHeiti},ItalicFont={STKaiti},SlantedFont = {HanziPen SC} , SlantedFeatures = {FakeSlant}]{STSong}
+% \setCJKsansfont[ItalicFont={HanziPen SC}]{HarmonyOS Sans SC}
+% \setCJKmonofont{Alibaba PuHuiTi}
+\newCJKfontfamily[song]\songti{STSong}%宋体
+\newCJKfontfamily[hei]\heiti{STHeiti}%黑体
+\newCJKfontfamily[kai]\kaiti{STKaiti}%楷体
+\newCJKfontfamily[fs]\fangsong{STFangsong}%仿宋
+\newCJKfontfamily[liti]\lishu{Baoli SC}%隶书
+\newCJKfontfamily[xk]\xingkai{HanziPen SC}%宋体
+
+\input{notation.tex}
+
+\bibliographystyle{IEEEtran}
+\renewcommand\bibname{参考文献}
+
+% --------------->>封面信息<<----------------
+\title{{计算机视觉报告：SIFT特征提取与匹配}\\{\normalsize{\itshape Technical Report on Computer Vision Programming Assignment: SIFT detection and matching}}}
+\author{叶翰樵}
+\affiliation{
+    中国科学院大学-人工智能学院-202218020629017\\
+    中国科学院自动化研究所
+}
+\emailAdd{yehanqiao22@mails.ucas.ac.cn}
+\abstract{}
+\keywords{}
+
+%================Document===================
+
+\begin{document}
+    \maketitle
+    \newpage
+
+    % --------------------->>正文<<-----------------------
+    \pagestyle{fancynotes}
+    \input{src/Introduction.tex}
+    \input{src/Keypoint detection.tex}
+    \input{src/SIFT descriptor.tex}
+    \input{src/Matching descriptors.tex}
+    \input{src/Experiment.tex}
+
+    % --------------------->>参考文献<<-----------------------
+    \bibliography{egbib}
+\end{document}
