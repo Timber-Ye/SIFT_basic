@@ -14,6 +14,8 @@ def getImageGradient(image):
     sobely = cv2.Sobel(image, cv2.CV_64F, 0, 1)
     magnitude = np.sqrt(np.square(sobelx) + np.square(sobely))
     angle = np.arctan2(-sobely, sobelx) * 180/np.pi
+
+    
     return magnitude, angle
 
 
