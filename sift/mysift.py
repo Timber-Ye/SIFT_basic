@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
-from pyramid import DoGPyramid
-from descriptor import computeDescriptors
+from .pyramid import DoGPyramid
+from .descriptor import computeDescriptors
 
 
 def mysift_matching(

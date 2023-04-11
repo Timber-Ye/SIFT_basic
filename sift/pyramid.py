@@ -141,7 +141,7 @@ if __name__ == "__main__":
     rescale_factor = 0.3  # rescale images to make it faster
     num_scales = 3  # number of scales per octave
     num_octaves = 5  # number of octaves
-    t_threshold = 0.05  # for feature matching
+    t_threshold = 0.05  # for feature detection
 
     img = cv2.imread("../images/hongluosi-2.jpg", cv2.IMREAD_GRAYSCALE)
     img_scaled = cv2.resize(img, (0, 0), fx=rescale_factor, fy=rescale_factor)
