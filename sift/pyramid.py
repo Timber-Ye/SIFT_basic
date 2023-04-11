@@ -4,16 +4,16 @@ import scipy.ndimage
 
 
 class DoGPyramid:
-    def __init__(self, img, num_scales, num_octaves, base_sigma):
-        self.image = img
+    def __init__(self, num_scales, num_octaves, base_sigma):
         self.num_scales = num_scales  # number of scales per octave
         self.num_octaves = num_octaves  # number of octaves
         self.sigma = base_sigma
 
         self.k = 2 ** (1 / self.num_scales)
-        self.scaler = np.vander([self.k], self.num_scales + 2, increasing=True).squeeze() * self.sigma * 1.414 * 2
+        self.scaler = np.vander([self.k], self.num_scales + 2, increasing=True).squeeze() * self.sigma * 1.414
 
         self.t = None  # DoG threshold
+        self.image = None
 
     def __compute_blurred_images(self):
         """
@@ -78,30 +78,42 @@ class DoGPyramid:
             is_keypoint[:, :, -1] = False
             locs = np.array(is_keypoint.nonzero()).T
             scales = self.scaler[locs[:, -1]]
-            keypoint_locations.append(locs * (2 ** oct_idx))
-            keypoint_scales.append(scales * (2 ** oct_idx))
+            keypoint_locations.append(locs)
+            keypoint_scales.append(scales)
 
         return keypoint_locations, keypoint_scales
 
-    def extract_keypoints(self, r_threshold=0.05):
+    def extract_keypoints(self, _img, r_threshold=0.05, _descriptor=None):
         """
         Extract keypoints
         :return:
         """
+        self.image = _img
         self.t = r_threshold
         blurred_images = self.__compute_blurred_images()
         dogs = self.__compute_difference_of_gaussians(blurred_images)
         kp_locs, kp_scales = self.__extrema_detection(dogs)
 
-        keypoints = []
-        for _, (locs, sizes) in enumerate(zip(kp_locs, kp_scales)):
-            for _, (loc, size) in enumerate(zip(locs, sizes)):
-                kp = cv2.KeyPoint(x=int(loc[1]), y=int(loc[0]), size=size)
-                keypoints.append(kp)
-        return keypoints
+        if _descriptor is None:
+            keypoints = []
+            # Adapt keypoint location such that they correspond to the
+            # originial image dimensions.
+
+            kp_locs = np.array([i * 2 ** idx for idx, i in enumerate(kp_locs)])
+            kp_scales = np.array([i * 2 ** (idx + 1) for idx, i in enumerate(kp_scales)])
+            for _, (locs, sizes) in enumerate(zip(kp_locs, kp_scales)):
+                for _, (loc, size) in enumerate(zip(locs, sizes)):
+                    kp = cv2.KeyPoint(x=int(loc[1]), y=int(loc[0]), size=size)
+                    keypoints.append(kp)
+            return keypoints, None
+
+        else:
+            return _descriptor(blurred_images, kp_locs, kp_scales)
 
 
 if __name__ == '__main__':
+    from descriptor import computeDescriptors
+
     sift_sigma = 1.0  # sigma used for blurring
     rescale_factor = 0.3  # rescale images to make it faster
     num_scales = 3  # number of scales per octave
@@ -112,8 +124,8 @@ if __name__ == '__main__':
     img_scaled = cv2.resize(img, (0, 0), fx=rescale_factor, fy=rescale_factor)
     nomalized_img = cv2.normalize(img_scaled.astype('float'), None, 0.0, 1.0, cv2.NORM_MINMAX)
 
-    pyramid = DoGPyramid(nomalized_img, num_scales, num_octaves, sift_sigma)
-    keypoints = pyramid.extract_keypoints(t_threshold)
+    pyramid = DoGPyramid(num_scales, num_octaves, sift_sigma)
+    keypoints, _ = pyramid.extract_keypoints(nomalized_img, t_threshold, computeDescriptors)
 
     im_with_keypoints = cv2.drawKeypoints(img_scaled, keypoints, None, color=(0,255,255), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
