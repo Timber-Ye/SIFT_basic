@@ -14,11 +14,11 @@ Personal implementation of SIFT(Scale-Invariant Feature Transform) Operator
 └── pyramid.py  # 构建DoG Pyramid，并提取SIFT特征点
 ```
 
-开发过程中使用了python 3.8，虚拟环境中安装[numpy](https://pypi.org/project/numpy/)，[opencv](https://pypi.org/project/opencv-python/)即可。环境安装说明（未验证，仅供参考）：
+开发过程中使用了python 3.8，在虚拟环境中需要安装[numpy](https://pypi.org/project/numpy/)，[opencv](https://pypi.org/project/opencv-python/)，[scipy](https://pypi.org/project/scipy/)，[matplotlib](https://pypi.org/project/matplotlib/)。环境安装说明（仅供参考）：
 
 ```zsh
 # 创建conda虚拟环境
-conda create -n mysift python=3.8 numpy
+conda create -n mysift python=3.8 numpy scipy
 # 进入conda虚拟环境
 conda activate mysift
 # 安装opencv
@@ -30,13 +30,19 @@ pip install opencv-python
 
 ```zsh
 python sift_detect.py \
-       --file_dir images/nvidia-3.jpg \ # input image
-       -o 5 \ # number of octaves
-       -s 3 \ # number of scales per octave
-       -rescale 0.3 \ # rescale images to make it faster
-       --sigma 1.0 \ # use for Gaussian blurring
-       --output_dir images/experiment/nvidia-3-keypoints.jpg \ # output destination
-       -t 5e-2 # threshold for detection
+       --file_dir images/nvidia-3.jpg \
+       -o 5 \
+       -s 3 \
+       -rescale 0.3 \
+       --sigma 1.0 \
+       --output_dir images/experiment/nvidia-3-keypoints.jpg \
+       -t 5e-2
+```
+
+获得命令行各参数含义可运行：
+
+```zsh
+python sift_detect.py -h
 ```
 
 ## Keypoint Matching
@@ -44,14 +50,20 @@ python sift_detect.py \
 
 ```zsh
 python image_matching.py \
-       --file_dir_1 images/nvidia-3.jpg \ # input image 1
-       --file_dir_2 images/nvidia-4.jpg \ # input image 2
-       -o 5 \ # number of octaves
-       -s 3 \ # number of scales per octave
+       --file_dir_1 images/nvidia-3.jpg \
+       --file_dir_2 images/nvidia-4.jpg \
+       -o 5 \
+       -s 3 \
        --rescale 0.3 \
-       --output_dir images/experiment/image_matching.pdf \ # output destination
-       --sigma 1.0 \ # use for Gaussian blurring
-       -t 0.05 # threshold for detection
+       --output_dir images/experiment/image_matching.pdf \
+       --sigma 1.0 \
+       -t 0.05
 ```
 
-### If practitioners are having any confusion about this repository, plz feel free to open an Issue to have a discussion.
+获得命令行各参数含义可运行：
+
+```zsh
+python image_matching.py -h
+```
+
+### If practitioners are having any confusion, plz feel free to open an Issue [here](https://github.com/Timber-Ye/SIFT_basic) to have a discussion.
