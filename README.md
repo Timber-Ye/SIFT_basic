@@ -66,4 +66,4 @@ python image_matching.py \
 python image_matching.py -h
 ```
 
-### If practitioners are having any confusion, plz feel free to open an Issue [here](https://github.com/Timber-Ye/SIFT_basic) to have a discussion.
+### If practitioners are having any confusion, plz feel free to open an Issue [here](https://github.com/Timber-Ye/SIFT_basic/issues) to have a discussion.
