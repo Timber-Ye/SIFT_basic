@@ -17,7 +17,7 @@ repos:
     -   id: black
         args: [--config=pyproject.toml]
 
--   repo: https://github.com/cmhughes/latexindent.pl.git
-    rev: V3.20.4
-    hooks:
-    -   id: latexindent
+#-   repo: https://github.com/cmhughes/latexindent.pl.git
+#    rev: V3.20.4
+#    hooks:
+#    -   id: latexindent

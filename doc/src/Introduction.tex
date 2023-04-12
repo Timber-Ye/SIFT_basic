@@ -69,7 +69,7 @@
 	\nabla^2_{\text{normalized}}g=\eqnmarkbox[emph2]{compensate}{\sigma^2}\left(\frac{\partial^2 g}{\partial x^2} + \frac{\partial^2 g}{\partial y^2}\right)
 \end{equation}
 
-\section{图像尺度空间}
+\section{图像尺度空间}\label{sec:图像尺度空间}
 
 对于图像信号，如果希望找到图像上以某一点为中心所在局部特征的尺度$r$，就可以使用一组尺度（$\sigma$）不同的归一化\lpl 分别对图像做卷积。\figref{fig:Scale-space blob detector}表示了一组用多尺度\lpl 相卷积得到的图像尺度空间，%
 在纵向找到该位置处响应值最大时的\lpl，然后根据其参数$\sigma$即可计算局部特征的尺度$r = \sqrt{2}\sigma$。%

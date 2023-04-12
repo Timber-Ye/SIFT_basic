@@ -407,3 +407,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+doc/Tmp/technical-report.pdf

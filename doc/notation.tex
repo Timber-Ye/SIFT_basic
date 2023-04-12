@@ -1,6 +1,21 @@
 \newcommand\figref[1]{\textbf{图}~\ref{#1}}
 \newcommand\thmref[1]{\textbf{定理}~\ref{#1}}
 \newcommand\equref[1]{\textbf{式}~(\ref{#1})~}
+\newcommand\secref[1]{\textbf{第}~\ref{#1}~\textbf{节}}
+\newcommand\parref[1]{\emph{Part~\ref{#1}}}
+\newcommand{\zhparen}[1]{（\raisebox{0.1ex}{#1}）}
+\newcommand{\enparen}[1]{\CASE{(}#1\CASE{)}}
+
+\newcommand{\drawgrid}{ % 绘制辅助网络，坐标范围：(0, 0)--(1,1)
+    \draw[very thin, draw=gray, step=0.02] (0,0) grid (1,1);
+    \draw[thin, draw=red, xstep=0.1, ystep=0.1] (0,0) grid (1,1);
+
+    \foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {\tiny 0.\x}; }
+    \node [anchor=north] at (1,0) {\tiny 1};
+
+    \foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {\tiny 0.\y}; }
+    \node [anchor=east] at (0,1) {\tiny 1};
+}
 
 \renewcommand{\figurename}{图}
 
@@ -31,7 +46,7 @@
 
 % \newacronym{⟨label⟩}{⟨abbrv⟩}{⟨full⟩}
 \newacronym[longplural={尺度不变特征变换（Scale-Invariant Feature Transform, SIFT）}]%
-           {sift}{SIFT}{尺度不变特征变换（Scale-Invariant Feature Transform, SIFT）}
+{sift}{SIFT}{尺度不变特征变换（Scale-Invariant Feature Transform, SIFT）}
 \newcommand{\sift}{\gls*{sift}}
 
 \newacronym{scale}{尺度不变性}{尺度不变性（scale invariance）}

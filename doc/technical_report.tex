@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[10pt]{article}
 %========================================
 \usepackage{%
 custom-NotesTeX,
@@ -13,13 +13,15 @@ subfigure
 }
 \renewcommand{\baselinestretch}{1.35}
 \usepackage[hyperfirst=false, nohypertypes={acronym}]{glossaries}
+\usetikzlibrary{decorations.fractals,spy}
+\usetikzlibrary{fit}% 坐标适配
 \setacronymstyle{short-long}
 \renewcommand*{\genacrfullformat}[2]{%
    \glsentrylong{#1}%
 }
 
 \usepackage[nottoc]{tocbibind}
-\usepackage[cachedir=./Tmp/mintedcache]{minted}
+\usepackage[cachedir=./Tmp/mintedcache, outputdir = ./Tmp]{minted}
 \usemintedstyle{default}
 
 %------------------>>Font<<------------------
@@ -54,23 +56,27 @@ subfigure
     中国科学院自动化研究所
 }
 \emailAdd{yehanqiao22@mails.ucas.ac.cn}
-\abstract{}
+\abstract{特征提取是计算机视觉底层任务中最具受关注的基础算法，在其后续进行的特征描述、匹配与之共同构成了一整套复杂而又清晰的处理流程，为物体识别、图像匹配等任务提供了解决思路。\sift %尺度不变特征变换（Scale-Invariant Feature Transform, SIFT）%
+是迄今使用最为广泛的一种特征提取算法，其能够在不同尺度和旋转角度下检测到具有独特性质的关键点，并进行鲁棒、高效的特征描述和匹配。
+
+此份报告围绕\sift 特征提取与匹配，首先在\parref{part:Introduction} 介绍高斯拉普拉斯核的空间尺度选择特性，以及图像尺度空间这两个重要概念，作为后续算法的铺垫；\parref{part:Keypoint detection}则具体描述了\sift 特征提取的基本流程，其中包括高斯差分金字塔构建以及关键点定位两个关键步骤；\parref{part:SIFT descriptor}介绍\sift 特征描述子；最后，在\parref{part:Matching descriptors}进一步解释多视角图像间特征描述子匹配的过程，并通过个人代码实现展示了\sift 特征提取与匹配基础流程的最终效果。
+}
 \keywords{}
 
 %================Document===================
 
 \begin{document}
-    \maketitle
-    \newpage
+\maketitle
+\newpage
 
-    % --------------------->>正文<<-----------------------
-    \pagestyle{fancynotes}
-    \input{src/Introduction.tex}
-    \input{src/Keypoint detection.tex}
-    \input{src/SIFT descriptor.tex}
-    \input{src/Matching descriptors.tex}
-    \input{src/Experiment.tex}
+% --------------------->>正文<<-----------------------
+\pagestyle{fancynotes}
+\input{src/Introduction.tex}
+\input{src/Keypoint detection.tex}
+\input{src/SIFT descriptor.tex}
+\input{src/Matching descriptors.tex}
+\input{src/Summary.tex}
 
-    % --------------------->>参考文献<<-----------------------
-    \bibliography{egbib}
+% --------------------->>参考文献<<-----------------------
+\bibliography{egbib}
 \end{document}
