@@ -33,7 +33,7 @@ python sift_detect.py \
        --file_dir images/nvidia-3.jpg \
        -o 5 \
        -s 3 \
-       -rescale 0.3 \
+       --rescale 0.3 \
        --sigma 1.0 \
        --output_dir images/experiment/nvidia-3-keypoints.jpg \
        -t 5e-2
