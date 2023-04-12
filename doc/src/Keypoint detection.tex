@@ -7,6 +7,7 @@
 \sift 注意到一个明显的问题是当\lpl 尺度越来越大$\sigma$时，卷积窗口$w$也会越来越大（一般认为$w\approx 2\times\lceil 3\sigma\rceil + 1$），计算消耗也会越来越明显。为了解决这一问题，\sift 指出可以采用\DoG 完成如下近似：
 \begin{equation}
 	\eqnmarkbox[emph2]{dog}{G(x,y,k\sigma) - G(x,y,\sigma)} \approx (k-1)\eqnmarkbox[emph2]{log}{\sigma^2\nabla^2 G}
+	\label{equ: DoG and LoG}
 \end{equation}
 \annotate[]{below}{dog}{\DoG}
 \annotate[]{below}{log}{scale-normalized \lpl}
@@ -49,7 +50,7 @@
 
 如\figref{fig: DoG Pyramid}所示，在每一个\octave 的高斯金字塔（左侧）内一共需要进行$S+3$次高斯操作，高斯核的标准差从下往上依次扩大$k=2^{1/S}$倍（这样设置能够确保待检测的尺度在每个\octave 之间刚好连续），相邻两层相减就得到了右侧的\DoG 。通过直接对一个\octave 的高斯金字塔的第$S$层进行两倍下采样，获得下一个\octave 的最底层。下面是构建\DoG 图像金字塔的步骤：
 \begin{enumerate}
-	\item 加载图像；
+	\item 加载灰度图像，对图像进行灰度归一化，也可缩小图像以加快处理效率；
 	\item 对于索引$s=[0, 1, \ldots, S+2]$，用标准差$k^s\sigma_0$对图像进行高斯模糊。这里可以采用\equref{equ: gaussian convolution}介绍的方法提高效率，每一层直接在上一层的基础上进行模糊；
 	\item 相邻的两张高斯模糊图像做差得到\DoG，每三层\DoG 就可以叠放成\figref{fig:Scale-space blob detector}所示的3D张量；
 	\item 重复2-3步以最终得到$O$个\octave 。后面每个\octave 的最底层高斯模糊图像可以直接从上一\octave 的第$S$层经两倍下采样获得。
@@ -63,10 +64,3 @@
 	\item 将每个\octave 中的$S+2$个\DoG 叠成一个$H\times W\times (S+2)$的张量，比较张量中每一个位置和它$26(8+9+9)$个邻域之间的大小关系。如果一个位置比它邻域都要大，则它是一个关键点。忽略\DoG 金字塔最底层和最高层中检测到的关键点，即只在张量的$[\cdot, \cdot, 1]\sim [\cdot, \cdot, S]$部分提取关键点。
 	\item 对每个\octave 重复上述过程。
 \end{enumerate}
-
-
-
-% 改进：
-% （1）关键点的精确定位
-% （2）实现对视角的鲁棒性\cite{mikolajczyk2004scale}
-% （3）去除边缘上的点。
