@@ -1,4 +1,4 @@
-# sift-remake
+# sift_basic
 Personal implementation of SIFT(Scale-Invariant Feature Transform) Operator
 
 ## Brief Introduction
