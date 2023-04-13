@@ -21,7 +21,7 @@ Personal implementation of SIFT(Scale-Invariant Feature Transform) Operator
 conda create -n mysift python=3.8 numpy scipy matplotlib
 # 进入conda虚拟环境
 conda activate mysift
-# 安装opencv
+# 安装opencv(CPU-only)
 pip install opencv-python
 ```
 
